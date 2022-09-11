@@ -8,7 +8,7 @@
 
 //variable declarations
 double balance = 5.00; //initialized balance to a starting dollar amount
-double price;
+double price, deposit;
 int itemNumber = 1; //initalized itemNumber with consideration to do..while loop execution
 
 //function prototypes
@@ -22,8 +22,11 @@ double reload(double balance); //reload the account balance
 int main() {
     greeting();
     viewBalance(balance);
-    while ( itemNumber != 10 ) {
+    while ( itemNumber != 9 ) {
         itemNumber = displayMenu();
+        if (itemNumber == 9) {
+            break;
+        }
         price = orderPrice(itemNumber);
         balance = checkForEnoughMoney(balance, price);
     }
@@ -52,7 +55,7 @@ void viewBalance(double balance) {
 
 int displayMenu() {
     do{
-        if (!(itemNumber >= 1 && itemNumber <=10)) {
+        if (!(itemNumber >= 1 && itemNumber <=9)) {
             printf("Please enter a valid selection\n");
         }
         printf(" _______________________________________________________________________________\n");
@@ -67,14 +70,13 @@ int displayMenu() {
         printf("|                         (6)  Waning Moons Tile   $3.00                        |\n");
         printf("|                         (7)  Treasure Chest      $5.00                        |\n");
         printf("|                         (8)  Check Balance       FREE                         |\n");
-        printf("|                         (9)  Deposit Money       FREE                         |\n");
-        printf("|                         (10) Exit Shoppe         FREE                         |\n");
+        printf("|                         (9) Exit Shoppe         FREE                         |\n");
         printf("|                                                                               |\n");
         printf("|                                                                               |\n");
         printf("|_______________Please Enter Your Selection (1-9) and Press Enter:______________|\n\n");
         scanf("%d", &itemNumber);
         printf("\n");
-    } while(!(itemNumber >= 1 && itemNumber <=10)); {
+    } while(!(itemNumber >= 1 && itemNumber <=9)); {
         return itemNumber;
     }
 }
@@ -132,9 +134,7 @@ double orderPrice(int itemNumber) {
             return price;
         case 8:
             viewBalance(balance);
-            break;
-        case 9:
-            return balance;
+            return 0.00;
     }
 }
     
@@ -144,8 +144,9 @@ double checkForEnoughMoney(double balance, double price) {
         printf("|                                              |\n");
         printf("|       Sorry, you don't have enough coin      |\n");
         printf("|______________________________________________|\n");
+        return 0;
     }
-    if ((balance - price) >= 0) {
+    else {
         balance = balance - price;
         printf(" ______________________________________________\n");
         printf("|                                              |\n");
@@ -153,10 +154,23 @@ double checkForEnoughMoney(double balance, double price) {
         printf("|                                              |\n");
         printf("|           Your new balance is: $%.2f         |\n", balance);
         printf("|______________________________________________|\n");
+        return balance;
     }
-    return balance;
 }
 
 double reload(double balance) {
-    
+    printf(" ______________________________________________\n");
+    printf("|                                              |\n");
+    printf("|        Your current balance is: $%.2f        |\n", balance);
+    printf("|                                              |\n");
+    printf("|       Please enter your deposit amount       |\n");
+    printf("|______________________________________________|\n");
+    scanf("%lf", &deposit);
+    balance = balance + deposit;
+    printf(" ______________________________________________\n");
+    printf("|                                              |\n");
+    printf("|          Your new balance is: $%.2f          |\n", balance);
+    printf("|                                              |\n");
+    printf("|______________________________________________|\n");
+    return balance;
 }
