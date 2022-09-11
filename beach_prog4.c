@@ -1,7 +1,7 @@
 /* 
 *
 *William Beach, COP2220, Program 4, 09/11/2022
-* Traveling Vendor Program - Simple interactive menu program with $balance
+* Traveling Vendor Program - Simple interactive menu program with $balance view and deposit
 */
 #define _CRT_SECURE_NO_WARNINGS //for Visual studio compiler 
 #include<stdio.h> //for printf and scanf
@@ -16,7 +16,7 @@ void greeting(void); //greets user and explains program
 void viewBalance(double balance); //displays current balance
 int displayMenu(); //display menu and retrieve selection from user
 double orderPrice(int itemNumber); //input item number, returns costs of item
-int checkForEnoughMoney(double balance, double price); //returns true/false if balance is enough or not respectively
+double checkForEnoughMoney(double balance, double price); //returns true/false if balance is enough or not respectively
 double reload(double balance); //reload the account balance
 
 int main() {
@@ -24,7 +24,8 @@ int main() {
     viewBalance(balance);
     while ( itemNumber != 10 ) {
         itemNumber = displayMenu();
-        orderPrice(itemNumber);
+        price = orderPrice(itemNumber);
+        balance = checkForEnoughMoney(balance, price);
     }
     printf("Thank you for shopping with us fat cats...Have a nice day.\n");
     return 0;
@@ -58,19 +59,19 @@ int displayMenu() {
         printf("|                                                                               |\n");
         printf("|                                      MENU                                     |\n");
         printf("|                                                                               |\n");
-        printf("|                           (1)  Cat's Eye Prism     $3.00                      |\n");
-        printf("|                           (2)  Corpse of Mayhem    $5.00                      |\n");
-        printf("|                           (3)  Guardian Mane       $1.00                      |\n");
-        printf("|                           (4)  Full Moons Tile     $4.00                      |\n");
-        printf("|                           (5)  Khajiit Cat Bed     $3.00                      |\n");
-        printf("|                           (6)  Waning Moons Tile   $3.00                      |\n");
-        printf("|                           (7)  Treasure Chest      $5.00                      |\n");
-        printf("|                           (8)  Check Balance       FREE                       |\n");
-        printf("|                           (9)  Deposit Money       FREE                       |\n");
-        printf("|                           (10) Exit Shoppe         FREE                       |\n");
+        printf("|                         (1)  Cat's Eye Prism     $3.00                        |\n");
+        printf("|                         (2)  Corpse of Mayhem    $5.00                        |\n");
+        printf("|                         (3)  Guardian Mane       $1.00                        |\n");
+        printf("|                         (4)  Full Moons Tile     $4.00                        |\n");
+        printf("|                         (5)  Khajiit Cat Bed     $3.00                        |\n");
+        printf("|                         (6)  Waning Moons Tile   $3.00                        |\n");
+        printf("|                         (7)  Treasure Chest      $5.00                        |\n");
+        printf("|                         (8)  Check Balance       FREE                         |\n");
+        printf("|                         (9)  Deposit Money       FREE                         |\n");
+        printf("|                         (10) Exit Shoppe         FREE                         |\n");
         printf("|                                                                               |\n");
         printf("|                                                                               |\n");
-        printf("|________________Please Enter Your Selection (1-9) and Press Enter:_____________|\n\n");
+        printf("|_______________Please Enter Your Selection (1-9) and Press Enter:______________|\n\n");
         scanf("%d", &itemNumber);
         printf("\n");
     } while(!(itemNumber >= 1 && itemNumber <=10)); {
@@ -81,40 +82,52 @@ int displayMenu() {
 double orderPrice(int itemNumber) {
     switch (itemNumber) {
         case 1:
-            printf(" ___________________________________________\n");
-            printf("|                                           |\n");
-            printf("| The cost of the Cat's Eye Prism is $3.00  |\n");
-            printf("|___________________________________________|\n");
+            printf(" ______________________________________________\n");
+            printf("|                                              |\n");
+            printf("|   The cost of the Cat's Eye Prism is $3.00   |\n");
+            printf("|______________________________________________|\n");
             price = 3.00;
             return price;
         case 2:
-            printf(" ___________________________________________\n");
-            printf("|                                           |\n");
-            printf("| The cost of the Corpse of Mayhem is $5.00 |\n");
-            printf("|___________________________________________|\n");
+            printf(" ______________________________________________\n");
+            printf("|                                              |\n");
+            printf("|  The cost of the Corpse of Mayhem is $5.00   |\n");
+            printf("|______________________________________________|\n");
             price = 5.00;
             return price;
         case 3:
-            printf(" ___________________________________________\n");
-            printf("|                                           |\n");
-            printf("|  The cost of the Guardian Mane is $1.00   |\n");
-            printf("|___________________________________________|\n"); 
+            printf(" ______________________________________________\n");
+            printf("|                                              |\n");
+            printf("|    The cost of the Guardian Mane is $1.00    |\n");
+            printf("|______________________________________________|\n"); 
             price = 1.00;
             return price;
-        case 4: 
-            printf("The cost of the Full Moons Tile is $4.00\n");
+        case 4:
+            printf(" ______________________________________________\n");
+            printf("|                                              |\n");
+            printf("|   The cost of the Full Moons Tile is $4.00   |\n");
+            printf("|______________________________________________|\n"); 
             price = 4.00;
             return price;
         case 5:
-            printf("The cost of the Khajiit Cat Bed is $3.00\n");
+            printf(" ______________________________________________\n");
+            printf("|                                              |\n");
+            printf("|   The cost of the Khajiit Cat Bed is $3.00   |\n");
+            printf("|______________________________________________|\n");
             price = 3.00;
             return price;
         case 6:
-            printf("The cost of the Waning Moons Tile is $3.00\n");
+            printf(" ______________________________________________\n");
+            printf("|                                              |\n");
+            printf("|  The cost of the Waning Moons Tile is $3.00  |\n");
+            printf("|______________________________________________|\n");
             price = 3.00;
             return price;
         case 7:
-            printf("The cost of the Treasure Chest is $5.00\n");
+            printf(" ______________________________________________\n");
+            printf("|                                              |\n");
+            printf("|   The cost of the Treasure Chest is $5.00    |\n");
+            printf("|______________________________________________|\n");
             price = 5.00;
             return price;
         case 8:
@@ -125,13 +138,25 @@ double orderPrice(int itemNumber) {
     }
 }
     
-
-
-
-
-
-/*int checkForEnoughMoney(double balance, double price) {
+double checkForEnoughMoney(double balance, double price) {
     if ((balance - price) < 0) {
-        printf()
+        printf(" ______________________________________________\n");
+        printf("|                                              |\n");
+        printf("|       Sorry, you don't have enough coin      |\n");
+        printf("|______________________________________________|\n");
     }
-}*/
+    if ((balance - price) >= 0) {
+        balance = balance - price;
+        printf(" ______________________________________________\n");
+        printf("|                                              |\n");
+        printf("|         Thank you for your purchase!         |\n");
+        printf("|                                              |\n");
+        printf("|           Your new balance is: $%.2f         |\n", balance);
+        printf("|______________________________________________|\n");
+    }
+    return balance;
+}
+
+double reload(double balance) {
+    
+}
