@@ -70,7 +70,7 @@ int displayMenu() {
         printf("|                         (6)  Waning Moons Tile   $3.00                        |\n");
         printf("|                         (7)  Treasure Chest      $5.00                        |\n");
         printf("|                         (8)  Check Balance       FREE                         |\n");
-        printf("|                         (9) Exit Shoppe         FREE                         |\n");
+        printf("|                         (9)  Exit Shoppe         FREE                         |\n");
         printf("|                                                                               |\n");
         printf("|                                                                               |\n");
         printf("|_______________Please Enter Your Selection (1-9) and Press Enter:______________|\n\n");
