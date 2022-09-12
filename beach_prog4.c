@@ -29,7 +29,6 @@ int main() {
         }
         price = orderPrice(itemNumber);
         balance = checkForEnoughMoney(balance, price);
-        reload(balance);
     }
     printf("Thank you for shopping with us fat cats...Have a nice day.\n");
     return 0;
@@ -145,6 +144,7 @@ double checkForEnoughMoney(double balance, double price) {
         printf("|                                              |\n");
         printf("|       Sorry, you don't have enough coin      |\n");
         printf("|______________________________________________|\n");
+        balance = reload(balance);
     }
     else {
         balance = balance - price;
