@@ -27,6 +27,10 @@ int main() {
         if (itemNumber == 9) {
             break;
         }
+        if (itemNumber == 8) {
+            viewBalance(balance);
+            continue;
+        }
         price = orderPrice(itemNumber);
         balance = checkForEnoughMoney(balance, price);
     }
@@ -34,7 +38,7 @@ int main() {
     return 0;
 }
 
-void greeting(void) {
+void greeting(void) { //greets user with shop name
     printf(" _______________________________________________________________________________ \n");
     printf("|                                                                               |\n");
     printf("|-------------------------------------------------------------------------------|\n");
@@ -45,7 +49,7 @@ void greeting(void) {
     printf("|_______________________________________________________________________________|\n\n");
 }
 
-void viewBalance(double balance) {
+void viewBalance(double balance) { //displays user's balance
     printf(" _______________________________________________________________________________\n");
     printf("|                                                                               |\n");
     printf("|                              Account Balance: $%.2f                           |\n", balance);
@@ -53,7 +57,7 @@ void viewBalance(double balance) {
 }
 
 
-int displayMenu() {
+int displayMenu() { //show menu while user's input is invalid. when they enter a valid input, return their input
     do{
         if (!(itemNumber >= 1 && itemNumber <=9)) {
             printf("Please enter a valid selection\n");
@@ -81,7 +85,7 @@ int displayMenu() {
     }
 }
 
-double orderPrice(int itemNumber) {
+double orderPrice(int itemNumber) { //pass user item selection to function that handles this input and returns data
     switch (itemNumber) {
         case 1:
             printf(" ______________________________________________\n");
@@ -138,7 +142,7 @@ double orderPrice(int itemNumber) {
     }
 }
     
-double checkForEnoughMoney(double balance, double price) {
+double checkForEnoughMoney(double balance, double price) { //deduct price of item selection and determine if user balance is enough. If so, deduct item price from user balance and return new balance
     if ((balance - price) < 0) {
         printf(" ______________________________________________\n");
         printf("|                                              |\n");
@@ -158,7 +162,7 @@ double checkForEnoughMoney(double balance, double price) {
     return balance;
 }
 
-double reload(double balance) {
+double reload(double balance) { //allow user to deposit money to allow for additional purchases
     printf(" ______________________________________________\n");
     printf("|                                              |\n");
     printf("|        Your current balance is: $%.2f        |\n", balance);
